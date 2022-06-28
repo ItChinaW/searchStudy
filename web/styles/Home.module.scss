@@ -1,6 +1,32 @@
 @import "globals";
 
 .container {
-  height: 100vh;
-  @include flexContainer;
+  width: 800px;
+  margin: 50px auto;
+  text-align: center;
+
+  :global {
+    h1 {
+      width: 710px;
+    }
+
+    .search {
+      @include flexContainer;
+      justify-content: center;
+
+      .input {
+        width: 400px;
+        height: 58px;
+      }
+
+      .input:focus {
+        border: none;
+      }
+
+      .submit {
+        width: 120px;
+        height: 58px;
+      }
+    }
+  }
 }

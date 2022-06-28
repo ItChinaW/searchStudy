@@ -1,12 +1,12 @@
 import type {NextPage} from 'next'
-import styles from '../styles/Home.module.scss'
-import {Button, Input} from "antd";
+import Head from 'next/head'
 
-const Home: NextPage = () => {
+const Home: NextPage = ({}) => {
     return (
-        <div className={styles.container}>
-            <Input placeholder={"输入题目内容搜索答案"}/>
-            <Button>搜索题目</Button>
+        <div>
+            <Head>
+                <title>首页</title>
+            </Head>
         </div>
     )
 }

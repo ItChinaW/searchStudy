@@ -1,4 +1,3 @@
-
 @mixin flexContainer($gap: 0px, $direction: row) {
   display: flex;
   flex-direction: $direction;
@@ -12,7 +11,7 @@ $text_color: #1a1a1a;
 $secondary_color: #6d6a6a;
 $wechatColor: #3FA72E;
 $tip_text: #8d8d8d;
-$main_color: #db2231;
+$main_color: #000;
 $green: #35c25c;
 $success: #35c25c;
 $error: #eb3b3b;
@@ -28,4 +27,3 @@ $fail_bg: #EAEEF2;
 $green_bg: #14CC9B;
 $blue_bg: #2D99FF;
 $gray58: #585858;
-
