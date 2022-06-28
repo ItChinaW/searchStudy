@@ -1,0 +1,31 @@
+
+@mixin flexContainer($gap: 0px, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $gap;
+}
+
+/*颜色*/
+$text_color: #1a1a1a;
+$secondary_color: #6d6a6a;
+$wechatColor: #3FA72E;
+$tip_text: #8d8d8d;
+$main_color: #db2231;
+$green: #35c25c;
+$success: #35c25c;
+$error: #eb3b3b;
+$warning: #FD8357;
+$link: $main_color;
+$not_allowed_color: #b1b1b1;
+$line_color: rgba(0, 0, 0, 0.12);
+$line_color_light: rgba(0, 0, 0, 0.06);
+$gray_bg: #f6f8fa;
+$dark_gray_bg: #babdc3;
+$dark_bg: #1a1a1a;
+$fail_bg: #EAEEF2;
+$green_bg: #14CC9B;
+$blue_bg: #2D99FF;
+$gray58: #585858;
+

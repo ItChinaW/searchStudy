@@ -1,3 +1,8 @@
+.idea/
+/web/node_modules
+/web/dist
+.vscode
+
 # Logs
 logs
 *.log
