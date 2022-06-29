@@ -1,0 +1,13 @@
+@import "../styles/globals.scss";
+
+.layout {
+  max-width: 800px;
+  height: 100vh;
+  margin: 0 auto;
+  @include flexContainer(0px, column);
+  justify-content: center;
+
+  main {
+    width: 100%;
+  }
+}

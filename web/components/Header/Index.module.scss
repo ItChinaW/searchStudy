@@ -1,8 +1,6 @@
-@import "globals";
+@import "../../styles/globals.scss";
 
 .container {
-  width: 800px;
-  margin: 50px auto;
   text-align: center;
 
   :global {

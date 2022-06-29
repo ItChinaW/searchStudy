@@ -1,6 +1,31 @@
 @import "globals";
 
 .search {
-  width: 800px;
-  margin: 0 auto;
+  margin-top: 20px;
+
+  :global {
+    .box {
+      li {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px dashed;
+        @include flexContainer;
+        justify-content: space-between;
+
+        span {
+          color: red;
+        }
+      }
+
+      li:last-child {
+        border: none;
+      }
+    }
+
+    .pointer {
+      cursor: pointer;
+    }
+  }
 }
+
+

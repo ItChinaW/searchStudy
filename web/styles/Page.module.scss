@@ -1,0 +1,12 @@
+@import "globals";
+
+.detail {
+  margin-top: 20px;
+
+  :global {
+    .select, .answer {
+      margin-top: 10px;
+      @include flexContainer(10px);
+    }
+  }
+}
