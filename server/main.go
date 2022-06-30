@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"server/core"
+	"server/global"
+	"server/initialize"
+)
 
 func main() {
-	fmt.Println("main")
+	global.DB = initialize.GormPgSql()
+
+	core.RunServer()
 }
