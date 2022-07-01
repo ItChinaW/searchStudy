@@ -3,10 +3,12 @@ package initialize
 import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"server/global"
 )
 
 func GormPgSql() *gorm.DB {
-	dsn := "host=localhost user=postgres password=wwwpg88com dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	dsn := "host=" + global.Config.Postgres.Host + " user=" + global.Config.Postgres.User + " password=" + global.Config.Postgres.Password +
+		" dbname=" + global.Config.Postgres.Dbname + " port=" + global.Config.Postgres.Port + " sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil

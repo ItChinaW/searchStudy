@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	global.Config = core.Config()
 	global.DB = initialize.GormPgSql()
 
 	core.RunServer()
