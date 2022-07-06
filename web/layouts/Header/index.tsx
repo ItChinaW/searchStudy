@@ -22,7 +22,9 @@ export const Header = () => {
                     placeholder="输入题目内容搜索答案"
                     className="input"
                     value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}/>
+                    onChange={(e) => setKeyword(e.target.value)}
+                    autoFocus={true}
+                />
                 <Link href={{pathname: '/search', query: {keyword}}}>
                     <a>
                         <Button className="submit">搜索题目</Button>
