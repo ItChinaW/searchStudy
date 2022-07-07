@@ -11,6 +11,7 @@ type ProjectApi struct{}
 func (i *ProjectApi) CreateProject(c *gin.Context) {
 	var project model.Projects
 	_ = c.ShouldBindJSON(&project)
+	fmt.Println(project)
 	if err := projectService.CreateProject(project); err != nil {
 		fmt.Println(err)
 		return
@@ -25,8 +26,17 @@ func (i *ProjectApi) DeleteProject(c *gin.Context) {
 }
 
 func (i *ProjectApi) GetProject(c *gin.Context) {
+	id := c.Param("id")
+	project, err := projectService.GetProject(id)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"message": err,
+		})
+		return
+	}
 	c.JSON(200, gin.H{
-		"message": "ok!!!",
+		"data":    project,
+		"message": "success",
 	})
 }
 

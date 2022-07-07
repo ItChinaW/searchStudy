@@ -16,7 +16,10 @@ func (i *ProjectService) DeleteProject() {
 
 }
 
-func (i *ProjectService) GetProject() {
+func (i *ProjectService) GetProject(id string) (list interface{}, err error) {
+	var project model.Projects
+	err = global.DB.First(&project, id).Error
+	return project, err
 }
 
 func (i *ProjectService) UpdateProject() {

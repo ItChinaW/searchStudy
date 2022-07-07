@@ -2,31 +2,41 @@ import React from 'react';
 import styles from "../../styles/Page.module.scss"
 import {Card} from "antd";
 import Head from "next/head";
+import {GetServerSideProps, NextPage} from "next";
+import {Project} from "../../apis/api-functions";
+import {ProjectDto} from "../../apis/dto-types";
 
-const Index = () => {
+const Index: NextPage<{ data: ProjectDto }> = ({data}) => {
     return (
         <div className={styles.detail}>
             <Head>
-                <title>2016超星尔雅东北亚国际关系史</title>
+                <title>{data.projectsTitle}</title>
             </Head>
-            <Card title={"2016超星尔雅东北亚国际关系史"}>
+            <Card title={data.projectsTitle}>
                 <div>
                     <strong>题目：</strong>
-                    <span>2016超星尔雅东北亚国际关系史2016超星尔雅东北亚国际关系史2016超星尔雅东北亚国际关系史2016超星尔雅东北亚国际关系史2016超星尔雅东北亚国际关系史2016超星尔雅东北亚国际关系史</span>
+                    <span>{data.projectsContent}</span>
                     <p className="select">
-                        <span>A：星尔</span>
-                        <span>B：北亚</span>
-                        <span>C：际关</span>
-                        <span>D：超星</span>
+                        <span>{data.projectsSelection}</span>
                     </p>
                     <p className="answer">
                         <strong>答案：</strong>
-                        <span>A、B</span>
+                        <span>{data.projectsAnswer}</span>
                     </p>
                 </div>
             </Card>
         </div>
     );
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const id = context.query.id as unknown as number
+    const res = await Project.getProjectById(id)
+    return {
+        props: {
+            data: res.data.data
+        }
+    }
+}
 
 export default Index;

@@ -10,6 +10,7 @@ type Projects struct {
 	ProjectsTitle           string         `json:"projectsTitle"`
 	ProjectsContent         string         `json:"projectsContent"`
 	ProjectsAnswer          string         `json:"projectsAnswer"`
+	ProjectsSelection       string         `json:"projectsSelection"`
 	ProjectsCategory        string         `json:"projectsCategory"`
 	ProjectsTags            pq.StringArray `gorm:"type:varchar[]" json:"projectsTags"`
 	ProjectsCollectionCount uint64         `json:"projectsCollectionCount"`
