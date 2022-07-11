@@ -4,9 +4,11 @@ import LOGO from "../../static/logo.png";
 import {Button, Input} from "antd";
 import {useState} from "react";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 export const Header = () => {
     const [keyword, setKeyword] = useState<string>("")
+    const router = useRouter()
 
     return (
         <div className={styles.container}>
@@ -24,6 +26,11 @@ export const Header = () => {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     autoFocus={true}
+                    onKeyDown={(e) => {
+                        if (e.code === "Enter") {
+                            router.push({pathname: '/search', query: {keyword}})
+                        }
+                    }}
                 />
                 <Link href={{pathname: '/search', query: {keyword}}}>
                     <a>

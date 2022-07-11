@@ -26,8 +26,11 @@ func (i *ProjectService) UpdateProject() {
 
 }
 
-func (i *ProjectService) GetProjectList(info model.PageListInfo) (list interface{}, err error) {
+func (i *ProjectService) GetProjectList(info model.PageListInfo) (list interface{}, total int64, err error) {
 	var project []model.Projects
-	err = global.DB.Where("projects_title LIKE ?", "%"+info.Keyword+"%").Find(&project).Error
-	return project, err
+	limit := info.PageSize
+	offset := info.PageSize * (info.Page - 1)
+
+	err = global.DB.Model(&model.Projects{}).Where("projects_title LIKE ?", "%"+info.Keyword+"%").Count(&total).Limit(limit).Offset(offset).Find(&project).Error
+	return project, total, err
 }

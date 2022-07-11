@@ -3,6 +3,7 @@ package system
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"log"
 	"server/model"
 )
 
@@ -47,15 +48,31 @@ func (i *ProjectApi) UpdateProject(c *gin.Context) {
 func (i *ProjectApi) GetProjectList(c *gin.Context) {
 	var pageListInfo model.PageListInfo
 	_ = c.ShouldBindQuery(&pageListInfo)
-	projectList, err := projectService.GetProjectList(pageListInfo)
+
+	if pageListInfo.Page == 0 {
+		pageListInfo.Page = 1
+	}
+	switch {
+	case pageListInfo.PageSize > 100:
+		pageListInfo.PageSize = 100
+	case pageListInfo.PageSize <= 0:
+		pageListInfo.PageSize = 10
+	}
+
+	projectList, total, err := projectService.GetProjectList(pageListInfo)
 	if err != nil {
+		log.Fatal(err)
 		c.JSON(400, gin.H{
 			"message": err,
 		})
 		return
 	}
 	c.JSON(200, gin.H{
-		"data":    projectList,
-		"message": "success",
+		"data":     projectList,
+		"total":    total,
+		"page":     pageListInfo.Page,
+		"pageSize": pageListInfo.PageSize,
+		"message":  "success",
+		"code":     200,
 	})
 }

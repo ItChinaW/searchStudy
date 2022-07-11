@@ -6,14 +6,19 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import {Project} from "../apis/api-functions";
 import {ProjectDto} from "../apis/dto-types";
+import {useState} from "react";
 
-const Search: NextPage<{ data: ProjectDto[] }> = ({data}) => {
+const Search: NextPage<{ data: ProjectDto[], total: number }> = ({data, total}) => {
     const router = useRouter()
     const keyword = router.query.keyword ?? ""
+    const [pagination, setPagination] = useState<{
+        current: number,
+        pageSize: number
+    }>()
     return (
         <div className={styles.search}>
             <Head>
-                <title>搜索结果</title>
+                <title>{keyword ? `${keyword} - 搜索结果` : "搜索结果"}</title>
             </Head>
             <Card title={`搜索结果 - ${keyword}`}>
                 <Spin spinning={false}>
@@ -29,7 +34,16 @@ const Search: NextPage<{ data: ProjectDto[] }> = ({data}) => {
                             </li>
                         ))}
                     </ul>
-                    <Pagination defaultCurrent={1} total={50}/>
+                    <Pagination
+                        {...pagination}
+                        total={total}
+                        onChange={(page, pageSize) => {
+                            setPagination({
+                                pageSize,
+                                current: page,
+                            })
+                            router.push({query: {page}})
+                        }}/>
                 </Spin>
             </Card>
         </div>
@@ -38,10 +52,15 @@ const Search: NextPage<{ data: ProjectDto[] }> = ({data}) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const keyword = context.query.keyword
-    const res = await Project.getProjectList(keyword)
+    let page = 0;
+    if (context.query.page) {
+        page = Number(context.query.page)
+    }
+    const res = await Project.getProjectList(keyword, page)
     return {
         props: {
-            data: res.data.data
+            data: res.data.data,
+            total: res.data.total
         }
     }
 }
